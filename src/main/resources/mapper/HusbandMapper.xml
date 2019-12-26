@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mybatis1.mapper.HusbandMapper">
+    <resultMap id="abn" type="com.example.mybatis1.bean.Husband">
+        <id column="id" property="id"></id>
+        <result column="salary" property="salary"></result>
+        <result column="name" property="name"></result>
+        <association property="wife" column="id" select="selectWife"></association>
+    </resultMap>
+    <select id="findById" resultMap="abn">
+        select * from husband where id = #{id}
+    </select>
+    <select id="selectWife" resultType="com.example.mybatis1.bean.Wife">
+        select * from wife where husband_id = #{id}   <!--和<association property="wife" column="id" select="selectWife"></association>中的column="id"值一致-->
+    </select>
+</mapper>

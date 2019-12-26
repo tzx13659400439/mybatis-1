@@ -1,9 +1,11 @@
 package com.example.mybatis1;
 
 import com.example.mybatis1.bean.Customer;
+import com.example.mybatis1.bean.Husband;
 import com.example.mybatis1.bean.Scustomer;
 import com.example.mybatis1.bean.Student;
 import com.example.mybatis1.mapper.CustomerMapper;
+import com.example.mybatis1.mapper.HusbandMapper;
 import com.example.mybatis1.mapper.ScustomerMapper;
 import com.example.mybatis1.mapper.StudentMapper;
 import org.junit.Test;
@@ -22,6 +24,8 @@ public class Mybatis1ApplicationTests {
     private StudentMapper studentMapper;
     @Autowired
     private ScustomerMapper scustomerMapper;
+    @Autowired
+    private HusbandMapper husbandMapper;
 
     @Test
     public void contextLoads() {
@@ -67,6 +71,13 @@ public class Mybatis1ApplicationTests {
         Scustomer scustomer = scustomerMapper.selectById(1);
         System.out.println(scustomer.toString());
 
+    }
+
+    @Test
+    public void que(){//一对一级联查询
+        Husband husband = husbandMapper.findById(1);
+        System.out.println(husband.toString());
+        System.out.println(husband.getWife().toString());
     }
 
 }
